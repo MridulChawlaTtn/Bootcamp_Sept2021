@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -13,6 +13,7 @@
         <poi-version>3.16</poi-version>
         <poi-ooxml-version>3.16</poi-ooxml-version>
         <jdk.version>1.8</jdk.version>
+        <suiteXmlFile>src/test/java/com/ttn/testSuites/testNGSuite.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -21,7 +22,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${org.testng-version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -53,17 +53,29 @@
         </dependency>
     </dependencies>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
     
 </project>
